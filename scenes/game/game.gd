@@ -11,5 +11,6 @@ func _on_damage_player(damage: int) -> void:
 	print("health ", player_health, ", damage: ", damage, ", new: ", new_player_health)
 	player_health = 0 if new_player_health < 0 else new_player_health
 	S.player_health_changed.emit(new_player_health)
-	# TODO: Handle game over
+	if player_health == 0:
+		S.game_over.emit()
 	
