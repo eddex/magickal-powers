@@ -1,0 +1,24 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bvv853wuvmlap"]
+
+[ext_resource type="FontFile" uid="uid://c58ib7cccwchu" path="res://assets/fonts/Kenney Pixel.ttf" id="1_xpjyi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tmi4j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d6hdt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e5pf3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8ordt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4vsvs"]
+
+[resource]
+Button/font_sizes/font_size = 64
+Button/fonts/font = ExtResource("1_xpjyi")
+Button/styles/disabled = SubResource("StyleBoxEmpty_tmi4j")
+Button/styles/focus = SubResource("StyleBoxEmpty_d6hdt")
+Button/styles/hover = SubResource("StyleBoxEmpty_e5pf3")
+Button/styles/normal = SubResource("StyleBoxEmpty_8ordt")
+Button/styles/pressed = SubResource("StyleBoxEmpty_4vsvs")
+Label/font_sizes/font_size = 64
+Label/fonts/font = ExtResource("1_xpjyi")

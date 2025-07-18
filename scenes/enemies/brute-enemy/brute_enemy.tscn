@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dojuhg6i0qkom"]
+
+[ext_resource type="Texture2D" uid="uid://dyeinwifdaynn" path="res://assets/kenney_scribble-dungeons/2x/barrel.png" id="1_3oc4c"]
+[ext_resource type="Script" uid="uid://c4db2ij6sossh" path="res://scenes/enemies/brute-enemy/brute_enemy.gd" id="1_khgsc"]
+[ext_resource type="Texture2D" uid="uid://c043nqrir7wg7" path="res://assets/kenney_scribble-dungeons/modified/dragon_mod.png" id="3_11bh0"]
+[ext_resource type="Texture2D" uid="uid://btukvyg0wnjts" path="res://assets/kenney_scribble-dungeons/weapon_hammer.png" id="4_vf33n"]
+[ext_resource type="Texture2D" uid="uid://tko50edrxthe" path="res://assets/kenney_scribble-dungeons/shield_straight.png" id="5_e0a21"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_en535"]
+radius = 17.4642
+
+[node name="BruteEnemy" type="Area2D"]
+script = ExtResource("1_khgsc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_en535")
+
+[node name="Barrel" type="Sprite2D" parent="."]
+self_modulate = Color(0.576471, 0.388235, 1, 1)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("1_3oc4c")
+
+[node name="DragonMod" type="Sprite2D" parent="."]
+self_modulate = Color(0.580392, 0.486275, 0.552941, 1)
+position = Vector2(-8.96, 2.01)
+rotation = 3.94968
+texture = ExtResource("3_11bh0")
+
+[node name="WeaponHammer" type="Sprite2D" parent="."]
+self_modulate = Color(0.623529, 0.647059, 0.662745, 1)
+position = Vector2(16, -29)
+rotation = 1.55967
+texture = ExtResource("4_vf33n")
+
+[node name="ShieldStraight" type="Sprite2D" parent="."]
+self_modulate = Color(0.705882, 0.403922, 0.423529, 1)
+position = Vector2(2, 30)
+rotation = 2.9245
+texture = ExtResource("5_e0a21")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
