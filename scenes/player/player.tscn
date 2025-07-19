@@ -94,3 +94,10 @@ self_modulate = Color(0.505882, 0.435294, 0.505882, 1)
 position = Vector2(21, 0)
 rotation = 1.5708
 texture = ExtResource("5_5gtgg")
+
+[node name="SpellSpawnPoint" type="Marker2D" parent="Tower/MovableTop/WeaponStaff"]
+unique_name_in_owner = true
+position = Vector2(0, -35)
+rotation = -1.5708
+
+[node name="ElementIndicators" type="Node2D" parent="."]

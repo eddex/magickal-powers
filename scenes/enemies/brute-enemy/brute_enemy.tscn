@@ -1,15 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://dojuhg6i0qkom"]
+[gd_scene load_steps=8 format=3 uid="uid://dojuhg6i0qkom"]
 
 [ext_resource type="Texture2D" uid="uid://dyeinwifdaynn" path="res://assets/kenney_scribble-dungeons/2x/barrel.png" id="1_3oc4c"]
 [ext_resource type="Script" uid="uid://c4db2ij6sossh" path="res://scenes/enemies/brute-enemy/brute_enemy.gd" id="1_khgsc"]
 [ext_resource type="Texture2D" uid="uid://c043nqrir7wg7" path="res://assets/kenney_scribble-dungeons/modified/dragon_mod.png" id="3_11bh0"]
 [ext_resource type="Texture2D" uid="uid://btukvyg0wnjts" path="res://assets/kenney_scribble-dungeons/weapon_hammer.png" id="4_vf33n"]
 [ext_resource type="Texture2D" uid="uid://tko50edrxthe" path="res://assets/kenney_scribble-dungeons/shield_straight.png" id="5_e0a21"]
+[ext_resource type="PackedScene" uid="uid://2bu752bigj81" path="res://scenes/enemies/enemy_damage_popup.tscn" id="6_e0a21"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_en535"]
 radius = 17.4642
 
-[node name="BruteEnemy" type="Area2D"]
+[node name="BruteEnemy" type="Area2D" groups=["enemy"]]
 script = ExtResource("1_khgsc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -26,7 +27,7 @@ position = Vector2(-8.96, 2.01)
 rotation = 3.94968
 texture = ExtResource("3_11bh0")
 
-[node name="WeaponHammer" type="Sprite2D" parent="."]
+[node name="Weapon" type="Sprite2D" parent="."]
 self_modulate = Color(0.623529, 0.647059, 0.662745, 1)
 position = Vector2(16, -29)
 rotation = 1.55967
@@ -41,5 +42,11 @@ texture = ExtResource("5_e0a21")
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="EnemyDamagePopup" parent="." instance=ExtResource("6_e0a21")]
+position = Vector2(-9, -42)
+
+[node name="DeathTimer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

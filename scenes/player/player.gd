@@ -1,4 +1,39 @@
 extends Area2D
 
+@export var projectile_parent_node : Node2D
+
+var spell_projectile_scene : PackedScene = preload("res://scenes/spells/Projectile/projectile.tscn")
+
+var selected_elements :  Array[E.Element] = []
+var spell_charging := false
+var spell_charge_time := 0.0
+
 func _physics_process(_delta: float) -> void:
 	%MovableTop.look_at(get_global_mouse_position())
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("element_earth") and selected_elements.size() < 3:
+		selected_elements.append(E.Element.Earth)
+		S.element_selected.emit(selected_elements.size() - 1, E.Element.Earth)
+	if Input.is_action_just_pressed("element_fire") and selected_elements.size() < 3:
+		selected_elements.append(E.Element.Fire)
+		S.element_selected.emit(selected_elements.size() - 1, E.Element.Fire)
+	if Input.is_action_just_pressed("element_water") and selected_elements.size() < 3:
+		selected_elements.append(E.Element.Water)
+		S.element_selected.emit(selected_elements.size() - 1, E.Element.Water)
+	
+	if selected_elements.size() > 0:
+		if spell_charging:
+			spell_charge_time += delta
+		if Input.is_action_just_pressed("primary_action"):
+			spell_charging = true
+		if Input.is_action_just_released("primary_action"):
+			var strength := spell_charge_time as int + 1
+			var spell : SpellBase = spell_projectile_scene.instantiate()
+			spell.transform = %SpellSpawnPoint.global_transform
+			spell.elements = selected_elements.duplicate() # otherwise it is cleared in the spell too :)
+			projectile_parent_node.add_child(spell)
+			spell_charging = false
+			spell_charge_time = 0.0
+			selected_elements.clear()
+			S.elements_cleared.emit()

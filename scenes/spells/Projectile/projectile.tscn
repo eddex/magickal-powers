@@ -1,0 +1,113 @@
+[gd_scene load_steps=13 format=3 uid="uid://dhxo8ydavcprw"]
+
+[ext_resource type="Script" uid="uid://b3kj4r1egp7id" path="res://scenes/spells/Projectile/projectile.gd" id="1_ctyb5"]
+[ext_resource type="Texture2D" uid="uid://d2qah0p85qm1s" path="res://assets/kenney_scribble-dungeons/barrel.png" id="1_kbkvg"]
+[ext_resource type="Texture2D" uid="uid://do5c6qpm2euai" path="res://assets/kenney_particle-pack/twirl_01.png" id="3_qy3wf"]
+[ext_resource type="Texture2D" uid="uid://chklainh767n4" path="res://assets/kenney_particle-pack/smoke_10.png" id="4_81lgg"]
+[ext_resource type="Texture2D" uid="uid://bayxrdkv7i2s3" path="res://assets/kenney_particle-pack/scorch_03.png" id="5_56gv2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ctyb5"]
+radius = 20.0998
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rpddj"]
+radius = 86.0058
+
+[sub_resource type="Animation" id="Animation_56gv2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_81lgg"]
+resource_name = "ROTATE"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rpddj"]
+_data = {
+&"RESET": SubResource("Animation_56gv2"),
+&"ROTATE": SubResource("Animation_81lgg")
+}
+
+[sub_resource type="Curve" id="Curve_hibpx"]
+_data = [Vector2(0, 0.179775), 0.0, 0.799426, 0, 0, Vector2(0.1, 0.427), 0.0, 0.0, 0, 0, Vector2(1, 0.426966), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_0lgdc"]
+offsets = PackedFloat32Array(0, 0.113333, 0.28, 1)
+colors = PackedColorArray(1, 1, 0.411765, 1, 0.945098, 0.647059, 0.109804, 1, 0.243137, 0, 0, 1, 0, 0, 0, 0)
+
+[node name="Projectile" type="Area2D" groups=["spell"]]
+script = ExtResource("1_ctyb5")
+
+[node name="ImpactCollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ctyb5")
+
+[node name="ExplosionCollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rpddj")
+disabled = true
+
+[node name="Timer" type="Timer" parent="ExplosionCollisionShape"]
+wait_time = 0.1
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_kbkvg")
+
+[node name="Effects" type="Node2D" parent="."]
+
+[node name="Twirl1" type="Sprite2D" parent="Effects"]
+scale = Vector2(0.095, 0.095)
+texture = ExtResource("3_qy3wf")
+
+[node name="Twirl2" type="Sprite2D" parent="Effects"]
+rotation = -3.14159
+scale = Vector2(0.095, 0.095)
+texture = ExtResource("3_qy3wf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Effects"]
+libraries = {
+&"": SubResource("AnimationLibrary_rpddj")
+}
+
+[node name="SmokeParticles" type="CPUParticles2D" parent="Effects"]
+emitting = false
+amount = 1
+texture = ExtResource("4_81lgg")
+one_shot = true
+gravity = Vector2(0, 0)
+angular_velocity_min = -20.29
+angular_velocity_max = 20.28
+scale_amount_curve = SubResource("Curve_hibpx")
+
+[node name="FireParticles" type="CPUParticles2D" parent="Effects"]
+emitting = false
+amount = 1
+texture = ExtResource("5_56gv2")
+lifetime = 5.0
+one_shot = true
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_hibpx")
+color_ramp = SubResource("Gradient_0lgdc")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="ExplosionCollisionShape/Timer" to="." method="_on_explosion_shape_timer_timeout"]

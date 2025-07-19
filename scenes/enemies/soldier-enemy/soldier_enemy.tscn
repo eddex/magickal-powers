@@ -1,36 +1,41 @@
-[gd_scene load_steps=7 format=3 uid="uid://cyn4w161eyqjs"]
+[gd_scene load_steps=8 format=3 uid="uid://cyn4w161eyqjs"]
 
 [ext_resource type="Script" uid="uid://dj63lbk425gbk" path="res://scenes/enemies/soldier-enemy/soldier_enemy.gd" id="1_18cjy"]
 [ext_resource type="Texture2D" uid="uid://d2qah0p85qm1s" path="res://assets/kenney_scribble-dungeons/barrel.png" id="1_terh2"]
 [ext_resource type="Texture2D" uid="uid://vrspr3hiw11e" path="res://assets/kenney_scribble-dungeons/weapon_spear.png" id="3_en535"]
 [ext_resource type="Texture2D" uid="uid://c043nqrir7wg7" path="res://assets/kenney_scribble-dungeons/modified/dragon_mod.png" id="3_ukbnt"]
 [ext_resource type="Texture2D" uid="uid://tko50edrxthe" path="res://assets/kenney_scribble-dungeons/shield_straight.png" id="5_b3dbx"]
+[ext_resource type="PackedScene" uid="uid://2bu752bigj81" path="res://scenes/enemies/enemy_damage_popup.tscn" id="6_en535"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_en535"]
 radius = 17.4642
 
-[node name="SoldierEnemy" type="Area2D"]
+[node name="SoldierEnemy" type="Area2D" groups=["enemy"]]
 script = ExtResource("1_18cjy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_en535")
 
 [node name="Barrel" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0.647059, 1, 1)
 texture = ExtResource("1_terh2")
 
-[node name="WeaponHammer" type="Sprite2D" parent="."]
+[node name="Weapon" type="Sprite2D" parent="."]
+self_modulate = Color(0.623529, 0.647059, 0.662745, 1)
 position = Vector2(2, 17)
 rotation = 1.74533
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_en535")
 
 [node name="DragonMod" type="Sprite2D" parent="."]
+self_modulate = Color(0.580392, 0.486275, 0.552941, 1)
 position = Vector2(-8.96, 2.01)
 rotation = 3.94968
 scale = Vector2(0.745, 0.745)
 texture = ExtResource("3_ukbnt")
 
 [node name="ShieldStraight" type="Sprite2D" parent="."]
+self_modulate = Color(0.705882, 0.403922, 0.423529, 1)
 position = Vector2(10, -16)
 rotation = 0.523599
 scale = Vector2(0.75, 0.75)
@@ -38,5 +43,11 @@ texture = ExtResource("5_b3dbx")
 
 [node name="AttackTimer" type="Timer" parent="."]
 
+[node name="EnemyDamagePopup" parent="." instance=ExtResource("6_en535")]
+position = Vector2(-8, -37)
+
+[node name="DeathTimer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
