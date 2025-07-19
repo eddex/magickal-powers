@@ -27,13 +27,18 @@ func _process(delta: float) -> void:
 			spell_charge_time += delta
 		if Input.is_action_just_pressed("primary_action"):
 			spell_charging = true
+			%ChargeAnimationPlayer.play("CHARGE")
+			%ChargeAnimationPlayer.queue("CHARGED")
 		if Input.is_action_just_released("primary_action"):
-			var strength := spell_charge_time as int + 1
+			var charge := spell_charge_time as int + 1
 			var spell : SpellBase = spell_projectile_scene.instantiate()
 			spell.transform = %SpellSpawnPoint.global_transform
+			spell.charge = charge if charge < 3 else 3
 			spell.elements = selected_elements.duplicate() # otherwise it is cleared in the spell too :)
 			projectile_parent_node.add_child(spell)
 			spell_charging = false
 			spell_charge_time = 0.0
 			selected_elements.clear()
 			S.elements_cleared.emit()
+			%ChargeAnimationPlayer.stop()
+			%ChargeAnimationPlayer.play("RESET")

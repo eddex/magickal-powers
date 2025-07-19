@@ -2,7 +2,6 @@ extends SpellBase
 
 var speed := 750
 var age := 0.0
-var strength := 1
 var spell : E.SpellElements = E.SpellElements.Earth
 
 var _element_colors := {
@@ -13,7 +12,7 @@ var _element_colors := {
 
 func _ready() -> void:
 	$Effects/AnimationPlayer.play("ROTATE")
-	$Sprite.scale = Vector2i(strength, strength)
+	$Sprite.scale = Vector2(charge * 0.5, charge * 0.5)
 	$Sprite.self_modulate = _element_colors[E.Element.Earth]
 	$Effects/Twirl1.self_modulate = _element_colors[E.Element.Earth]
 	$Effects/Twirl2.self_modulate = _element_colors[E.Element.Earth]
@@ -32,7 +31,7 @@ func _physics_process(delta: float) -> void:
 	age += delta
 	if age > 5:
 		queue_free()
-	position += transform.x * speed * delta
+	position += transform.x * speed * charge * 0.5 * delta
 
 
 func _on_area_entered(area: Area2D) -> void:
@@ -47,6 +46,8 @@ func _on_area_entered(area: Area2D) -> void:
 		$Effects/SmokeParticles.emitting = true
 		if elements.has(E.Element.Fire):
 			$Effects/FireParticles.emitting = true
+		if elements.has(E.Element.Water):
+			$Effects/WaterParticles.emitting = true
 
 
 func _on_explosion_shape_timer_timeout() -> void:

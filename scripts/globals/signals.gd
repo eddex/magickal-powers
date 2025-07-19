@@ -11,4 +11,6 @@ signal elements_cleared()
 
 signal enemy_died()
 
+signal tick()
+
 @warning_ignore_restore("unused_signal")
