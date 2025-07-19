@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvun18hi61180"]
+[gd_scene load_steps=10 format=3 uid="uid://dvun18hi61180"]
 
 [ext_resource type="Script" uid="uid://4aeq40jgiqsi" path="res://scenes/main-menu/main_menu.gd" id="1_fusrs"]
 [ext_resource type="Theme" uid="uid://bvv853wuvmlap" path="res://ressources/ui_theme.tres" id="1_qhk2d"]
+[ext_resource type="Texture2D" uid="uid://dihm5fbkojl31" path="res://assets/kenney-jam-resources-1.0/kenney-jam-logo-s.png" id="4_hy6po"]
+[ext_resource type="Texture2D" uid="uid://d233qptx7nu7i" path="res://assets/kenney_fantasy-ui-borders/divider-fade-001.png" id="4_w2hs4"]
+[ext_resource type="Texture2D" uid="uid://k5hynnbc6thf" path="res://assets/kenney_cartography-pack/parchmentFoldedCrinkled.png" id="5_w2hs4"]
+[ext_resource type="FontFile" uid="uid://c7nmsy3kudcdp" path="res://assets/fonts/Kenney Future.ttf" id="6_lhle4"]
+[ext_resource type="Texture2D" uid="uid://c3cnb6a46kd3u" path="res://assets/kenney_cartography-pack/castle.png" id="6_sg3tv"]
+[ext_resource type="Texture2D" uid="uid://p2uegglgb41" path="res://assets/kenney_scribble-dungeons/plants.png" id="8_eel2y"]
+
+[sub_resource type="Gradient" id="Gradient_eel2y"]
+colors = PackedColorArray(3.56168e-06, 0.582465, 0, 1, 0, 0.584314, 0, 0)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -12,6 +21,17 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_qhk2d")
 script = ExtResource("1_fusrs")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(960, -100)
+texture = ExtResource("8_eel2y")
+lifetime = 5.0
+emission_shape = 3
+emission_rect_extents = Vector2(960, 1)
+gravity = Vector2(0, 98)
+angular_velocity_max = 127.06
+radial_accel_max = 26.47
+color_ramp = SubResource("Gradient_eel2y")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -29,17 +49,200 @@ theme_override_constants/margin_bottom = 50
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/CenterContainer"]
 layout_mode = 2
-text = "Game Title"
+alignment = 1
 
-[node name="ButtonsContainer" type="CenterContainer" parent="VBoxContainer"]
+[node name="Title" type="Label" parent="VBoxContainer/MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 256
+text = "Magickal Powers"
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 50
 
-[node name="PlayGameButton" type="Button" parent="VBoxContainer/ButtonsContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ButtonsContainer"]
 layout_mode = 2
-theme_override_constants/outline_size = 70
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ButtonsContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_w2hs4")
+
+[node name="PlayGameButton" type="Button" parent="VBoxContainer/ButtonsContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
 text = "Play Game"
 
-[connection signal="pressed" from="VBoxContainer/ButtonsContainer/PlayGameButton" to="." method="_on_play_game_button_pressed"]
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ButtonsContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_w2hs4")
+flip_h = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/ButtonsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ButtonsContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_w2hs4")
+
+[node name="HowToPlayButton" type="Button" parent="VBoxContainer/ButtonsContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "How to Play"
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ButtonsContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_w2hs4")
+flip_h = true
+
+[node name="CenterContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Subtitle" type="Label" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "this game was made during"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("4_hy6po")
+stretch_mode = 2
+
+[node name="SubSubTitle" type="Label" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+text = "in 2025 by eddex"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="Tutorial" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CloseTutorialButton" type="TextureButton" parent="Tutorial"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -512.0
+offset_right = 512.0
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_w2hs4")
+
+[node name="MarginContainer" type="MarginContainer" parent="Tutorial/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 150
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tutorial/TextureRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Tutorial/TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_lhle4")
+theme_override_font_sizes/font_size = 32
+text = "Dear powerful magickal wizard,"
+
+[node name="Label2" type="Label" parent="Tutorial/TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_lhle4")
+theme_override_font_sizes/font_size = 32
+text = "Mosters have invaded our sacred land!
+They are attacking our beloved castle
+and we need your help to defend it."
+
+[node name="Label3" type="Label" parent="Tutorial/TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_lhle4")
+theme_override_font_sizes/font_size = 32
+text = "In case you forgot...
+You can create powerful spells by
+combining up to 3 elements.
+You do this with your Q, W and E keys.
+Q = Earth, W = Fire, E = Water"
+
+[node name="Label7" type="Label" parent="Tutorial/TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_lhle4")
+theme_override_font_sizes/font_size = 32
+text = "Once the elements are ready, press
+hold your left mouse button to charge
+the spell. The longer you charge, the
+more powerful the spell will be."
+
+[node name="Label8" type="Label" parent="Tutorial/TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_lhle4")
+theme_override_font_sizes/font_size = 32
+text = "Some enemies have resistances. Don't
+try to shoot the fire enemy with fire!"
+
+[node name="Label9" type="Label" parent="Tutorial/TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_lhle4")
+theme_override_font_sizes/font_size = 32
+text = "Good luck and swift hands!"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tutorial/TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label10" type="Label" parent="Tutorial/TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_lhle4")
+theme_override_font_sizes/font_size = 32
+text = "Yours truely, the King"
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial/TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_sg3tv")
+
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/HBoxContainer/PlayGameButton" to="." method="_on_play_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/HBoxContainer2/HowToPlayButton" to="." method="_on_how_to_play_button_pressed"]
+[connection signal="pressed" from="Tutorial/CloseTutorialButton" to="." method="_on_close_tutorial_button_pressed"]

@@ -13,6 +13,7 @@ func _ready() -> void:
 	spawn_new_enemy()
 
 func _on_enemy_died() -> void:
+	print("_on_enemy_died, ", _enemy_count)
 	spawn_new_enemy()
 
 func spawn_new_enemy() -> void:

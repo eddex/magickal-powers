@@ -13,8 +13,10 @@ func _on_player_health_chnaged(new_health: int) -> void:
 
 func _on_game_over() -> void:
 	$GameOver.show()
+	get_tree().paused = true
 
 func _on_exit_button_pressed() -> void:
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/main-menu/main_menu.tscn")
 
 func _on_element_selected(pos: int, element: E.Element) -> void:

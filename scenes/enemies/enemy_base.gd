@@ -24,10 +24,10 @@ func ready() -> void:
 
 func _on_effect_timer_timeout() -> void:
 	# update effects
-	if is_burning > 0:
+	if is_burning > 0 and resistance != E.Element.Fire:
 		is_burning = max(0, is_burning - effect_timer_wait_time)
 		take_damage(1)
-	if is_wet > 0:
+	if is_wet > 0 and resistance != E.Element.Water:
 		is_wet = max(0, is_wet - effect_timer_wait_time)
 		_speed_modifier = 0.5 if is_wet > 0 else 1
 		
@@ -54,6 +54,8 @@ func attack() -> void:
 	S.damage_player.emit(damage)
 
 func take_damage(damage: int) -> void:
+	if health <= 0: # happens on burn effect
+		return
 	var new_health = health - damage
 	if new_health <= 0:
 		new_health = 0

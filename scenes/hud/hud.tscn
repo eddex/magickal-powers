@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dqi2v8xr3dh8p" path="res://assets/kenney_fantasy-ui-borders/panel-transparent-center-031.png" id="7_mq0y1"]
 
 [node name="HUD" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
