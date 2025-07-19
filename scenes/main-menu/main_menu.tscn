@@ -189,7 +189,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_lhle4")
 theme_override_font_sizes/font_size = 32
-text = "Mosters have invaded our sacred land!
+text = "Monsters have invaded our sacred land!
 They are attacking our beloved castle
 and we need your help to defend it."
 

@@ -34,15 +34,18 @@ theme_override_constants/margin_top = 15
 [node name="CenterContainer" type="CenterContainer" parent="Health"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Health/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Health/CenterContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Health/CenterContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Health/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Health/CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("1_c45xl")
 
-[node name="PlayerHealth" type="TextureProgressBar" parent="Health/CenterContainer/HBoxContainer"]
+[node name="PlayerHealth" type="TextureProgressBar" parent="Health/CenterContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 value = 57.0
@@ -52,7 +55,7 @@ texture_progress = ExtResource("2_0bx4p")
 tint_under = Color(1, 1, 1, 0.709804)
 tint_progress = Color(1, 0.52549, 0.580392, 0.858824)
 
-[node name="Label" type="Label" parent="Health/CenterContainer/HBoxContainer/PlayerHealth"]
+[node name="Label" type="Label" parent="Health/CenterContainer/VBoxContainer/HBoxContainer/PlayerHealth"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -68,86 +71,25 @@ grow_vertical = 2
 text = "100"
 horizontal_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="Health/CenterContainer/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="Health/CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("1_c45xl")
 flip_h = true
 
-[node name="GameOver" type="Panel" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="GameOver"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GameOver/CenterContainer"]
-layout_mode = 2
-theme_override_constants/separation = 50
-alignment = 1
-
-[node name="Label" type="Label" parent="GameOver/CenterContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 128
-text = "Game Over"
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="GameOver/CenterContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Health/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Label2" type="Label" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Health/CenterContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "Score:"
 
-[node name="Label" type="Label" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="HudScoreLabel" type="Label" parent="Health/CenterContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "0"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="GameOver/CenterContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Label2" type="Label" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "Monsters defeated:"
-
-[node name="Label" type="Label" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "0"
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="GameOver/CenterContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="TextureRect" type="TextureRect" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("1_c45xl")
-stretch_mode = 2
-
-[node name="ExitButton" type="Button" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-text = "Back to Main Menu"
-
-[node name="TextureRect2" type="TextureRect" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("1_c45xl")
-stretch_mode = 2
-flip_h = true
 
 [node name="Elements" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -155,6 +97,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -131.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/margin_bottom = 15
@@ -275,5 +218,101 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("7_mq0y1")
+
+[node name="GameOver" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOver/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Label" type="Label" parent="GameOver/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="NewHighScore" type="Label" parent="GameOver/CenterContainer/VBoxContainer/Label"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = 47.0
+offset_right = 156.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.0523599
+theme_override_colors/font_color = Color(0.937255, 0.905882, 0, 1)
+theme_override_constants/outline_size = 10
+text = "NEW HIGH SCORE"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameOver/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label2" type="Label" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Score:"
+
+[node name="ScoreLabel" type="Label" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "022"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GameOver/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label2" type="Label" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Monsters defeated:"
+
+[node name="KillsLabel" type="Label" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="GameOver/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("1_c45xl")
+stretch_mode = 2
+
+[node name="ExitButton" type="Button" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Back to Main Menu"
+
+[node name="TextureRect2" type="TextureRect" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("1_c45xl")
+stretch_mode = 2
+flip_h = true
 
 [connection signal="pressed" from="GameOver/CenterContainer/VBoxContainer/HBoxContainer3/ExitButton" to="." method="_on_exit_button_pressed"]

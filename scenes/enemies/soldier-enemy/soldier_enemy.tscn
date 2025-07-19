@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cyn4w161eyqjs"]
+[gd_scene load_steps=12 format=3 uid="uid://cyn4w161eyqjs"]
 
 [ext_resource type="Script" uid="uid://dj63lbk425gbk" path="res://scenes/enemies/soldier-enemy/soldier_enemy.gd" id="1_18cjy"]
 [ext_resource type="Texture2D" uid="uid://d2qah0p85qm1s" path="res://assets/kenney_scribble-dungeons/barrel.png" id="1_terh2"]
@@ -10,6 +10,71 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_en535"]
 radius = 17.4642
 
+[sub_resource type="Animation" id="Animation_en535"]
+resource_name = "WALK"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barrel:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0872665, 0.0872665, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_b3dbx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barrel:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Barrel/Weapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 17)]
+}
+
+[sub_resource type="Animation" id="Animation_bqcl7"]
+resource_name = "ATTACK"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barrel/Weapon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(2, 17), Vector2(8.055, 17), Vector2(2, 17)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bqcl7"]
+_data = {
+&"ATTACK": SubResource("Animation_bqcl7"),
+&"RESET": SubResource("Animation_b3dbx"),
+&"WALK": SubResource("Animation_en535")
+}
+
 [node name="SoldierEnemy" type="Area2D" groups=["enemy"]]
 script = ExtResource("1_18cjy")
 
@@ -20,21 +85,21 @@ shape = SubResource("CircleShape2D_en535")
 self_modulate = Color(0, 0.647059, 1, 1)
 texture = ExtResource("1_terh2")
 
-[node name="Weapon" type="Sprite2D" parent="."]
+[node name="Weapon" type="Sprite2D" parent="Barrel"]
 self_modulate = Color(0.623529, 0.647059, 0.662745, 1)
 position = Vector2(2, 17)
 rotation = 1.74533
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_en535")
 
-[node name="DragonMod" type="Sprite2D" parent="."]
+[node name="DragonMod" type="Sprite2D" parent="Barrel"]
 self_modulate = Color(0.580392, 0.486275, 0.552941, 1)
 position = Vector2(-8.96, 2.01)
-rotation = 3.94968
+rotation = -2.33351
 scale = Vector2(0.745, 0.745)
 texture = ExtResource("3_ukbnt")
 
-[node name="ShieldStraight" type="Sprite2D" parent="."]
+[node name="ShieldStraight" type="Sprite2D" parent="Barrel"]
 self_modulate = Color(0.705882, 0.403922, 0.423529, 1)
 position = Vector2(10, -16)
 rotation = 0.523599
@@ -47,6 +112,11 @@ texture = ExtResource("5_b3dbx")
 position = Vector2(-8, -37)
 
 [node name="DeathTimer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bqcl7")
+}
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

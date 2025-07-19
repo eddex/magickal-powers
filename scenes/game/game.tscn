@@ -168,13 +168,13 @@ tile_set = SubResource("TileSet_lfrn8")
 
 [node name="Projectiles" type="Node2D" parent="."]
 
-[node name="Enemies" type="Node2D" parent="." node_paths=PackedStringArray("enemy_spawn_timer")]
-script = ExtResource("6_87uf6")
-enemy_spawn_timer = NodePath("../EnemySpawnTimer")
-
 [node name="Player" parent="." node_paths=PackedStringArray("projectile_parent_node") instance=ExtResource("2_7h61r")]
 position = Vector2(960, 540)
 projectile_parent_node = NodePath("../Projectiles")
+
+[node name="Enemies" type="Node2D" parent="." node_paths=PackedStringArray("enemy_spawn_timer")]
+script = ExtResource("6_87uf6")
+enemy_spawn_timer = NodePath("../EnemySpawnTimer")
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 wait_time = 10.0

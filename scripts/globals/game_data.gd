@@ -6,3 +6,5 @@ var element_colors := {
 	E.Element.Fire:Color(1.0, 0.502, 0.0),
 	E.Element.Water: Color(0.0, 0.478, 1.0)
 }
+
+var high_score := 0

@@ -10,6 +10,7 @@ signal element_selected(pos: int, element: E.Element)
 signal elements_cleared()
 
 signal enemy_died()
+signal damage_dealt(damage: int)
 
 signal tick()
 

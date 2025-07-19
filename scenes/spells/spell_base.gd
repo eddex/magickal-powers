@@ -8,5 +8,6 @@ var charge := 1
 func get_damage(resistance: E.Element) -> int:
 	var damage := base_damage * charge * charge * charge * elements.size()
 	if elements.has(resistance):
-		damage = int(damage * 0.3)
+		var damaging_elements := elements.size() - elements.count(resistance)
+		damage = int(damage / elements.size() * damaging_elements)
 	return damage

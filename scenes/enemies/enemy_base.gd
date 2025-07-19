@@ -1,7 +1,7 @@
 extends Area2D
 class_name EnemyBase
 
-var speed := 100
+var speed := 80
 var _speed_modifier := 1.0
 var attack_mode := false
 var is_dead := false
@@ -26,7 +26,7 @@ func _on_effect_timer_timeout() -> void:
 	# update effects
 	if is_burning > 0 and resistance != E.Element.Fire:
 		is_burning = max(0, is_burning - effect_timer_wait_time)
-		take_damage(1)
+		take_damage(5)
 	if is_wet > 0 and resistance != E.Element.Water:
 		is_wet = max(0, is_wet - effect_timer_wait_time)
 		_speed_modifier = 0.5 if is_wet > 0 else 1
@@ -66,3 +66,4 @@ func take_damage(damage: int) -> void:
 		attack_mode = false
 	health = new_health
 	damage_taken.emit(damage)
+	S.damage_dealt.emit(damage)
