@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 S="*res://scripts/globals/signals.gd"
+G="*res://scripts/globals/game_data.gd"
 
 [display]
 

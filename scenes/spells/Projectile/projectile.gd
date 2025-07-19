@@ -4,27 +4,21 @@ var speed := 750
 var age := 0.0
 var spell : E.SpellElements = E.SpellElements.Earth
 
-var _element_colors := {
-	E.Element.Earth: Color(0.453, 0.205, 0.0),
-	E.Element.Fire:Color(1.0, 0.502, 0.0),
-	E.Element.Water: Color(0.0, 0.478, 1.0)
-}
-
 func _ready() -> void:
 	$Effects/AnimationPlayer.play("ROTATE")
 	$Sprite.scale = Vector2(charge * 0.5, charge * 0.5)
-	$Sprite.self_modulate = _element_colors[E.Element.Earth]
-	$Effects/Twirl1.self_modulate = _element_colors[E.Element.Earth]
-	$Effects/Twirl2.self_modulate = _element_colors[E.Element.Earth]
+	$Sprite.self_modulate = G.element_colors[E.Element.Earth]
+	$Effects/Twirl1.self_modulate = G.element_colors[E.Element.Earth]
+	$Effects/Twirl2.self_modulate = G.element_colors[E.Element.Earth]
 	if elements.has(E.Element.Fire) and not elements.has(E.Element.Water):
-		$Effects/Twirl1.self_modulate = _element_colors[E.Element.Fire]
-		$Effects/Twirl2.self_modulate = _element_colors[E.Element.Fire]
+		$Effects/Twirl1.self_modulate = G.element_colors[E.Element.Fire]
+		$Effects/Twirl2.self_modulate = G.element_colors[E.Element.Fire]
 	if elements.has(E.Element.Fire) and elements.has(E.Element.Water):
-		$Effects/Twirl1.self_modulate = _element_colors[E.Element.Water]
-		$Effects/Twirl2.self_modulate = _element_colors[E.Element.Fire]
+		$Effects/Twirl1.self_modulate = G.element_colors[E.Element.Water]
+		$Effects/Twirl2.self_modulate = G.element_colors[E.Element.Fire]
 	if not elements.has(E.Element.Fire) and elements.has(E.Element.Water):
-		$Effects/Twirl1.self_modulate = _element_colors[E.Element.Water]
-		$Effects/Twirl2.self_modulate = _element_colors[E.Element.Water]
+		$Effects/Twirl1.self_modulate = G.element_colors[E.Element.Water]
+		$Effects/Twirl2.self_modulate = G.element_colors[E.Element.Water]
 
 
 func _physics_process(delta: float) -> void:

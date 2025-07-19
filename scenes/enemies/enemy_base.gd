@@ -7,7 +7,7 @@ var attack_mode := false
 var is_dead := false
 var health := 100
 var damage := 5
-var resistance := E.Element.Fire
+var resistance := E.Element.None
 
 # elemental spell effects
 var effect_timer_wait_time := 0.2
@@ -20,6 +20,7 @@ signal died()
 
 func ready() -> void:
 	S.tick.connect(_on_effect_timer_timeout)
+	resistance = [E.Element.None, E.Element.Earth, E.Element.Fire, E.Element.Water][randi_range(0, 3)]
 
 func _on_effect_timer_timeout() -> void:
 	# update effects

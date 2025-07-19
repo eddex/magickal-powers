@@ -7,6 +7,7 @@ func _ready() -> void:
 	died.connect(_oh_no_i_died)
 	damage_taken.connect(_on_damage_taken)
 	ready()
+	$Barrel.self_modulate = G.element_colors[resistance]
 
 func _on_attack_mode_changed() -> void:
 	$AttackTimer.start()

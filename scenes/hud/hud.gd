@@ -1,11 +1,5 @@
 extends Control
 
-var element_colors := {
-	E.Element.Earth: Color(0.453, 0.205, 0.0),
-	E.Element.Fire:Color(1.0, 0.502, 0.0),
-	E.Element.Water: Color(0.0, 0.478, 1.0)
-}
-
 func _ready() -> void:
 	$GameOver.hide()
 	S.player_health_changed.connect(_on_player_health_chnaged)
@@ -25,7 +19,7 @@ func _on_exit_button_pressed() -> void:
 
 func _on_element_selected(pos: int, element: E.Element) -> void:
 	var element_indicator : TextureRect = %ElementIndicators.get_child(pos)
-	element_indicator.self_modulate = element_colors[element]
+	element_indicator.self_modulate = G.element_colors[element]
 
 func _on_elements_cleared() -> void:
 	for element_indicator : TextureRect in %ElementIndicators.get_children():

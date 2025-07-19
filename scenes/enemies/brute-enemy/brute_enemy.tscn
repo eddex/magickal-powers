@@ -17,7 +17,7 @@ script = ExtResource("1_khgsc")
 shape = SubResource("CircleShape2D_en535")
 
 [node name="Barrel" type="Sprite2D" parent="."]
-self_modulate = Color(0.576471, 0.388235, 1, 1)
+self_modulate = Color(0.504182, 0.496156, 0.488126, 1)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("1_3oc4c")
 
