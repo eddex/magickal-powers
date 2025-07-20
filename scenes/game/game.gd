@@ -6,6 +6,7 @@ func _ready() -> void:
 	S.damage_player.connect(_on_damage_player)
 	S.player_health_changed.emit(player_health)
 	$EffectTickTimer.start()
+	$MusicAudioStreamPlayer.play()
 
 func _on_damage_player(damage: int) -> void:
 	var new_player_health := player_health - damage
@@ -13,6 +14,7 @@ func _on_damage_player(damage: int) -> void:
 	S.player_health_changed.emit(player_health)
 	if player_health == 0:
 		S.game_over.emit()
+		$MusicAudioStreamPlayer.pitch_scale = 0.75
 
 
 func _on_enemy_spawn_timer_timeout() -> void:

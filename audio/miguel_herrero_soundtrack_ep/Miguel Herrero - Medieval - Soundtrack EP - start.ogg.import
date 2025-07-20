@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cyubosp24ytrk"
+path="res://.godot/imported/Miguel Herrero - Medieval - Soundtrack EP - start.ogg-c3f3e68cbf0bf9cacd4cef69eff7e711.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/miguel_herrero_soundtrack_ep/Miguel Herrero - Medieval - Soundtrack EP - start.ogg"
+dest_files=["res://.godot/imported/Miguel Herrero - Medieval - Soundtrack EP - start.ogg-c3f3e68cbf0bf9cacd4cef69eff7e711.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

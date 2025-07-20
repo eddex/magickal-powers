@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dojuhg6i0qkom"]
+[gd_scene load_steps=15 format=3 uid="uid://dojuhg6i0qkom"]
 
 [ext_resource type="Texture2D" uid="uid://dyeinwifdaynn" path="res://assets/kenney_scribble-dungeons/2x/barrel.png" id="1_3oc4c"]
 [ext_resource type="Script" uid="uid://c4db2ij6sossh" path="res://scenes/enemies/brute-enemy/brute_enemy.gd" id="1_khgsc"]
@@ -6,24 +6,37 @@
 [ext_resource type="Texture2D" uid="uid://btukvyg0wnjts" path="res://assets/kenney_scribble-dungeons/weapon_hammer.png" id="4_vf33n"]
 [ext_resource type="Texture2D" uid="uid://tko50edrxthe" path="res://assets/kenney_scribble-dungeons/shield_straight.png" id="5_e0a21"]
 [ext_resource type="PackedScene" uid="uid://2bu752bigj81" path="res://scenes/enemies/enemy_damage_popup.tscn" id="6_e0a21"]
+[ext_resource type="AudioStream" uid="uid://dptugnxdwbfmg" path="res://audio/kenney_impact-sounds/footstep_carpet_003.ogg" id="7_o5bbt"]
+[ext_resource type="AudioStream" uid="uid://bloqbvp3jxgwq" path="res://audio/kenney_impact-sounds/impactPlate_heavy_004.ogg" id="8_mub0w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_en535"]
 radius = 17.4642
 
-[sub_resource type="Animation" id="Animation_e0a21"]
-resource_name = "WALK"
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_mub0w"]
+resource_name = "ATTACK"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Barrel:rotation")
+tracks/0/path = NodePath("Barrel/Weapon:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.266667, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0872665, -0.0872665, 0.0]
+"values": [Vector2(17.7778, -32.2222), Vector2(29.708, -27.852), Vector2(17.7778, -32.2222)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Barrel/Weapon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.55967, 1.76104, 1.55967]
 }
 
 [sub_resource type="Animation" id="Animation_o5bbt"]
@@ -64,49 +77,189 @@ tracks/2/keys = {
 "update": 0,
 "values": [1.55967]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Barrel/ShieldStraight:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2.22222, 33.3333)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Barrel/ShieldStraight:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.9245]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Barrel/DragonMod:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-9.95556, 2.23333)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Barrel/DragonMod:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.33351]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Barrel:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
-[sub_resource type="Animation" id="Animation_mub0w"]
-resource_name = "ATTACK"
+[sub_resource type="Animation" id="Animation_e0a21"]
+resource_name = "WALK"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barrel:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, -0.0872665, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_brdua"]
+resource_name = "DEATH"
+length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Barrel/Weapon:position")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(17.7778, -32.2222), Vector2(29.708, -27.852), Vector2(17.7778, -32.2222)]
+"values": [Vector2(17.7778, -32.2222), Vector2(-7.132, -55.407)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("Barrel/Weapon:rotation")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.55967, 0.457276]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Barrel/ShieldStraight:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2.22222, 33.3333), Vector2(-23.738, 46.053)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Barrel/ShieldStraight:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.9245, 4.35634]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Barrel/DragonMod:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.31),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-9.95556, 2.23333), Vector2(-66.611, -0.842)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Barrel/DragonMod:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.31),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-2.33351, -9.89078]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Barrel:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1, 3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [1.55967, 1.76104, 1.55967]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0.505882, 0.498039, 0.486275, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mub0w"]
 _data = {
 &"ATTACK": SubResource("Animation_mub0w"),
+&"DEATH": SubResource("Animation_brdua"),
 &"RESET": SubResource("Animation_o5bbt"),
 &"WALK": SubResource("Animation_e0a21")
 }
 
-[node name="BruteEnemy" type="Area2D" groups=["enemy"]]
+[node name="BruteEnemy" type="Area2D" node_paths=PackedStringArray("on_hit_audio_player", "on_death_audio_player", "on_attack_audio_player") groups=["enemy"]]
 script = ExtResource("1_khgsc")
+on_hit_audio_player = NodePath("OnHitAudioStreamPlayer")
+on_death_audio_player = NodePath("DeathAudioStreamPlayer")
+on_attack_audio_player = NodePath("AttackAudioStreamPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_en535")
 
 [node name="Barrel" type="Sprite2D" parent="."]
-self_modulate = Color(0.504182, 0.496156, 0.488126, 1)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("1_3oc4c")
 
@@ -137,13 +290,23 @@ wait_time = 2.0
 [node name="EnemyDamagePopup" parent="." instance=ExtResource("6_e0a21")]
 position = Vector2(-9, -42)
 
-[node name="DeathTimer" type="Timer" parent="."]
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_mub0w")
 }
 
+[node name="OnHitAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_o5bbt")
+bus = &"SFX"
+
+[node name="DeathAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_o5bbt")
+bus = &"SFX"
+
+[node name="AttackAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_mub0w")
+bus = &"SFX"
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

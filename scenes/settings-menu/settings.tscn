@@ -1,0 +1,135 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6fklkwj1xfj1"]
+
+[ext_resource type="Theme" uid="uid://bvv853wuvmlap" path="res://ressources/ui_theme.tres" id="1_pa1pf"]
+[ext_resource type="Texture2D" uid="uid://k5hynnbc6thf" path="res://assets/kenney_cartography-pack/parchmentFoldedCrinkled.png" id="2_pogoo"]
+[ext_resource type="Script" uid="uid://defptmq2s3huf" path="res://scenes/settings-menu/settings.gd" id="2_voyi6"]
+[ext_resource type="Texture2D" uid="uid://c043nqrir7wg7" path="res://assets/kenney_scribble-dungeons/modified/dragon_mod.png" id="3_pogoo"]
+[ext_resource type="Texture2D" uid="uid://d233qptx7nu7i" path="res://assets/kenney_fantasy-ui-borders/divider-fade-001.png" id="5_0b2hq"]
+[ext_resource type="AudioStream" uid="uid://bloqbvp3jxgwq" path="res://audio/kenney_impact-sounds/impactPlate_heavy_004.ogg" id="6_k5q2j"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_pa1pf")
+script = ExtResource("2_voyi6")
+
+[node name="ExitButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -512.0
+offset_right = 512.0
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_pogoo")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 150
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 128
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TextureRect/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Effects Volume:"
+
+[node name="SfxHSlider" type="HSlider" parent="TextureRect/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_icons/grabber = ExtResource("3_pogoo")
+theme_override_icons/grabber_highlight = ExtResource("3_pogoo")
+ticks_on_borders = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TextureRect/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Music Volume:"
+
+[node name="MusicHSlider" type="HSlider" parent="TextureRect/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_icons/grabber = ExtResource("3_pogoo")
+theme_override_icons/grabber_highlight = ExtResource("3_pogoo")
+ticks_on_borders = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_0b2hq")
+stretch_mode = 2
+
+[node name="OkButton" type="Button" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Close"
+
+[node name="TextureRect2" type="TextureRect" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("5_0b2hq")
+stretch_mode = 2
+flip_h = true
+
+[node name="SfxAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_k5q2j")
+bus = &"SFX"
+
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="drag_ended" from="TextureRect/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/SfxHSlider" to="." method="_on_sfx_h_slider_drag_ended"]
+[connection signal="value_changed" from="TextureRect/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/MusicHSlider" to="." method="_on_music_h_slider_value_changed"]
+[connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/HBoxContainer/OkButton" to="." method="_on_ok_button_pressed"]

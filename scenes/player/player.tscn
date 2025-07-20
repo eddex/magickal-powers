@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://q6r62le8ors5"]
+[gd_scene load_steps=18 format=3 uid="uid://q6r62le8ors5"]
 
 [ext_resource type="Script" uid="uid://b7xqo2p2i7pc5" path="res://scenes/player/player.gd" id="1_p47bc"]
 [ext_resource type="Texture2D" uid="uid://b0fyijmlchpc3" path="res://assets/kenney_scribble-dungeons/wall_edge.png" id="2_0owmy"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://fesiffbax862" path="res://assets/kenney_scribble-dungeons/weapon_staff.png" id="5_5gtgg"]
 [ext_resource type="Texture2D" uid="uid://dwdb2whmm2flg" path="res://assets/kenney_particle-pack/magic_04.png" id="8_5gtgg"]
 [ext_resource type="Texture2D" uid="uid://djwdk15lfo7ev" path="res://assets/kenney_particle-pack/magic_05.png" id="9_h17s1"]
+[ext_resource type="AudioStream" uid="uid://b08ju0er7i0wl" path="res://audio/kenney_impact-sounds/impactMining_001.ogg" id="10_h17s1"]
+[ext_resource type="AudioStream" uid="uid://caeq8gwef47km" path="res://audio/kenney_interface-sounds/maximize_005.ogg" id="10_je7p5"]
+[ext_resource type="AudioStream" uid="uid://c2emdnsyb8l3v" path="res://audio/kenney_interface-sounds/glass_004.ogg" id="12_fm80t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0owmy"]
 size = Vector2(135, 134)
@@ -113,6 +116,34 @@ tracks/7/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 0.905882, 0.101961, 1), Color(1, 0, 0.223529, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_je7p5"]
+resource_name = "CHARGED"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Magic05:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.5664]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Magic04:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.785398, -13.3518]
+}
+
 [sub_resource type="Animation" id="Animation_h17s1"]
 length = 0.001
 tracks/0/type = "value"
@@ -210,34 +241,6 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_je7p5"]
-resource_name = "CHARGED"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Magic05:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 12.5664]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Magic04:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-0.785398, -13.3518]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_je7p5"]
@@ -356,3 +359,17 @@ libraries = {
 }
 
 [node name="ElementIndicators" type="Node2D" parent="."]
+
+[node name="ChargeAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_je7p5")
+pitch_scale = 0.06
+bus = &"SFX"
+
+[node name="ShootAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_h17s1")
+bus = &"SFX"
+
+[node name="FullyChargedAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_fm80t")
+volume_db = -7.73
+bus = &"SFX"

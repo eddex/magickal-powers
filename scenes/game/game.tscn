@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bxbubq3fker4h"]
+[gd_scene load_steps=10 format=4 uid="uid://bxbubq3fker4h"]
 
 [ext_resource type="Script" uid="uid://b7jcyr51ui1tk" path="res://scenes/game/game.gd" id="1_bdhmt"]
 [ext_resource type="PackedScene" uid="uid://ckfmav171yxge" path="res://scenes/pause_menu/pause_menu.tscn" id="1_sul5r"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://q6r62le8ors5" path="res://scenes/player/player.tscn" id="2_7h61r"]
 [ext_resource type="Texture2D" uid="uid://dt0pd06ukgu02" path="res://assets/kenney_scribble-dungeons/tilesheet.png" id="3_0sr1o"]
 [ext_resource type="Script" uid="uid://bj3gr18ptt0m0" path="res://scenes/game/enemies.gd" id="6_87uf6"]
+[ext_resource type="AudioStream" uid="uid://ccje5ax55cl7v" path="res://audio/miguel_herrero_soundtrack_ep/Miguel Herrero - Medieval - Soundtrack EP - battle.ogg" id="7_bdhmt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kelw5"]
 texture = ExtResource("3_0sr1o")
@@ -156,10 +157,10 @@ script = ExtResource("1_bdhmt")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="HUD" parent="UI" instance=ExtResource("2_5i0tg")]
+
 [node name="PauseMenu" parent="UI" instance=ExtResource("1_sul5r")]
 visible = false
-
-[node name="HUD" parent="UI" instance=ExtResource("2_5i0tg")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 self_modulate = Color(0.517647, 0.72549, 0.478431, 1)
@@ -181,6 +182,11 @@ wait_time = 10.0
 
 [node name="EffectTickTimer" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="MusicAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("7_bdhmt")
+bus = &"Music"
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="timeout" from="EffectTickTimer" to="." method="_on_effect_tick_timer_timeout"]

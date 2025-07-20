@@ -23,13 +23,16 @@ func _on_damage_taken(damage: int) -> void:
 		$EnemyDamagePopup.display_damage(damage)
 
 func _on_attack_timer_timeout() -> void:
+	if is_dead:
+		return
 	$AnimationPlayer.play("ATTACK")
 	attack()
 
 func _oh_no_i_died() -> void:
 	$AnimationPlayer.stop()
-	$DeathTimer.start()
+	$AnimationPlayer.play("DEATH")
 	$CollisionShape2D.set_deferred("disabled", true)
 
-func _on_death_timer_timeout() -> void:
-	queue_free()
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "DEATH":
+		queue_free()

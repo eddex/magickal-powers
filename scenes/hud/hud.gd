@@ -5,6 +5,7 @@ var score := 0
 
 func _ready() -> void:
 	$GameOver.hide()
+	$GameStartedAudioStreamPlayer.play()
 	S.player_health_changed.connect(_on_player_health_chnaged)
 	S.game_over.connect(_on_game_over)
 	S.element_selected.connect(_on_element_selected)
@@ -18,6 +19,7 @@ func _on_player_health_chnaged(new_health: int) -> void:
 
 func _on_game_over() -> void:
 	$GameOver.show()
+	$GameOverAudioStreamPlayer.play()
 	%ScoreLabel.text = str(score)
 	%KillsLabel.text = str(kills)
 	%NewHighScore.visible = G.high_score < score

@@ -1,6 +1,10 @@
 extends Area2D
 class_name EnemyBase
 
+@export var on_hit_audio_player : AudioStreamPlayer
+@export var on_death_audio_player : AudioStreamPlayer
+@export var on_attack_audio_player : AudioStreamPlayer
+
 var speed := 80
 var _speed_modifier := 1.0
 var attack_mode := false
@@ -48,9 +52,14 @@ func on_area_entered(area: Area2D) -> void:
 			is_burning = 2.0
 		if spell.elements.has(E.Element.Water):
 			is_wet = 2.0
+		on_hit_audio_player.play()
 		take_damage(damage_taken)
 
 func attack() -> void:
+	if is_dead:
+		return
+	on_attack_audio_player.pitch_scale = randf_range(0.98, 1.02)
+	on_attack_audio_player.play()
 	S.damage_player.emit(damage)
 
 func take_damage(damage: int) -> void:

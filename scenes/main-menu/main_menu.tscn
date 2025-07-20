@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvun18hi61180"]
+[gd_scene load_steps=14 format=3 uid="uid://dvun18hi61180"]
 
 [ext_resource type="Script" uid="uid://4aeq40jgiqsi" path="res://scenes/main-menu/main_menu.gd" id="1_fusrs"]
 [ext_resource type="Theme" uid="uid://bvv853wuvmlap" path="res://ressources/ui_theme.tres" id="1_qhk2d"]
@@ -8,6 +8,10 @@
 [ext_resource type="FontFile" uid="uid://c7nmsy3kudcdp" path="res://assets/fonts/Kenney Future.ttf" id="6_lhle4"]
 [ext_resource type="Texture2D" uid="uid://c3cnb6a46kd3u" path="res://assets/kenney_cartography-pack/castle.png" id="6_sg3tv"]
 [ext_resource type="Texture2D" uid="uid://p2uegglgb41" path="res://assets/kenney_scribble-dungeons/plants.png" id="8_eel2y"]
+[ext_resource type="PackedScene" uid="uid://b6fklkwj1xfj1" path="res://scenes/settings-menu/settings.tscn" id="9_0n1sh"]
+[ext_resource type="AudioStream" uid="uid://b1m4skdy6lnto" path="res://audio/kenney_rpg-audio/handleSmallLeather2.ogg" id="9_7m0km"]
+[ext_resource type="AudioStream" uid="uid://2kn8mivjtxys" path="res://audio/kenney_rpg-audio/handleSmallLeather.ogg" id="10_f371p"]
+[ext_resource type="AudioStream" uid="uid://cyubosp24ytrk" path="res://audio/miguel_herrero_soundtrack_ep/Miguel Herrero - Medieval - Soundtrack EP - start.ogg" id="11_f371p"]
 
 [sub_resource type="Gradient" id="Gradient_eel2y"]
 colors = PackedColorArray(3.56168e-06, 0.582465, 0, 1, 0, 0.584314, 0, 0)
@@ -55,6 +59,9 @@ alignment = 1
 
 [node name="Title" type="Label" parent="VBoxContainer/MarginContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
 theme_override_font_sizes/font_size = 256
 text = "Magickal Powers"
 
@@ -75,6 +82,7 @@ texture = ExtResource("4_w2hs4")
 
 [node name="PlayGameButton" type="Button" parent="VBoxContainer/ButtonsContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 96
 text = "Play Game"
 
@@ -96,10 +104,33 @@ texture = ExtResource("4_w2hs4")
 
 [node name="HowToPlayButton" type="Button" parent="VBoxContainer/ButtonsContainer/HBoxContainer2"]
 layout_mode = 2
+theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 96
 text = "How to Play"
 
 [node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ButtonsContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_w2hs4")
+flip_h = true
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/ButtonsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ButtonsContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_w2hs4")
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer/ButtonsContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 96
+text = "Settings"
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ButtonsContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("4_w2hs4")
@@ -131,14 +162,6 @@ theme_override_constants/margin_top = 20
 
 [node name="Tutorial" type="Panel" parent="."]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CloseTutorialButton" type="TextureButton" parent="Tutorial"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -243,6 +266,32 @@ text = "Yours truely, the King"
 layout_mode = 2
 texture = ExtResource("6_sg3tv")
 
+[node name="CloseTutorialButton" type="TextureButton" parent="Tutorial"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Settings" parent="." instance=ExtResource("9_0n1sh")]
+visible = false
+layout_mode = 1
+
+[node name="TutorialOpenAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_7m0km")
+bus = &"SFX"
+
+[node name="TutorialCloseAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_f371p")
+bus = &"SFX"
+
+[node name="MusicAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_f371p")
+bus = &"Music"
+
 [connection signal="pressed" from="VBoxContainer/ButtonsContainer/HBoxContainer/PlayGameButton" to="." method="_on_play_game_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonsContainer/HBoxContainer2/HowToPlayButton" to="." method="_on_how_to_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/HBoxContainer3/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="Tutorial/CloseTutorialButton" to="." method="_on_close_tutorial_button_pressed"]
+[connection signal="on_settings_closed" from="Settings" to="." method="_on_settings_on_settings_closed"]
