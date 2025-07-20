@@ -159,12 +159,12 @@ script = ExtResource("1_bdhmt")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="UI" instance=ExtResource("2_5i0tg")]
-visible = false
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("1_sul5r")]
 visible = false
 
 [node name="Difficulty" parent="UI" instance=ExtResource("4_87uf6")]
+visible = false
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 self_modulate = Color(0.517647, 0.72549, 0.478431, 1)

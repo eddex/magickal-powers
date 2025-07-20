@@ -3,7 +3,10 @@ extends Control
 var kills := 0
 var score := 0
 
+var game_finished := false
+
 func _ready() -> void:
+	GameSave.load_from_file()
 	$GameOver.hide()
 	$GameStartedAudioStreamPlayer.play()
 	S.player_health_changed.connect(_on_player_health_chnaged)
@@ -19,6 +22,7 @@ func _on_player_health_chnaged(new_health: int) -> void:
 	%PlayerHealth/Label.text = str(new_health)
 
 func _on_game_won() -> void:
+	game_finished = true
 	%GameOverLabel.text = "YOU WIN!"
 	$GameOver.show()
 	$GameWonAudioStreamPlayer.play()
@@ -29,8 +33,10 @@ func _on_game_won() -> void:
 	%NewHighScore.visible = G.high_score < score
 	if G.high_score < score:
 		G.high_score = score
+		GameSave.save_game()
 
 func _on_game_over() -> void:
+	game_finished = true
 	$GameOver.show()
 	$GameOverAudioStreamPlayer.play()
 	%ScoreLabel.text = str(score)
@@ -38,6 +44,7 @@ func _on_game_over() -> void:
 	%NewHighScore.visible = G.high_score < score
 	if G.high_score < score:
 		G.high_score = score
+		GameSave.save_game()
 		
 	get_tree().paused = true
 
@@ -60,6 +67,10 @@ func _on_damage_dealt(damage: int) -> void:
 func _on_enemy_died() -> void:
 	kills = kills + 1
 	score = score + 250
+	# ugly hack for race condition
+	if game_finished and G.high_score < score:
+		G.high_score = score
+		GameSave.save_game()
 	_update_hud_score()
 
 func _update_hud_score() -> void:

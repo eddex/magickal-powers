@@ -15,12 +15,14 @@ config/description="A game made in 48h for Kenney Jam 2025"
 config/version="1.0.0"
 run/main_scene="uid://dvun18hi61180"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/image="uid://d0sxuj24jhhpe"
+config/icon="uid://dxdei0bntq38c"
 
 [autoload]
 
 S="*res://scripts/globals/signals.gd"
 G="*res://scripts/globals/game_data.gd"
+GameSave="*res://scripts/globals/game_save.gd"
 
 [display]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2q5qmdj6x4rs"]
+[gd_scene load_steps=13 format=3 uid="uid://b2q5qmdj6x4rs"]
 
 [ext_resource type="Script" uid="uid://banep6mt3iwtk" path="res://scenes/hud/hud.gd" id="1_0bx4p"]
 [ext_resource type="Texture2D" uid="uid://d233qptx7nu7i" path="res://assets/kenney_fantasy-ui-borders/divider-fade-001.png" id="1_c45xl"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d2qah0p85qm1s" path="res://assets/kenney_scribble-dungeons/barrel.png" id="6_mq0y1"]
 [ext_resource type="Texture2D" uid="uid://c5ovj4tsmeqa5" path="res://assets/kenney_fantasy-ui-borders/panel-transparent-border-031.png" id="6_n56i7"]
 [ext_resource type="Texture2D" uid="uid://dqi2v8xr3dh8p" path="res://assets/kenney_fantasy-ui-borders/panel-transparent-center-031.png" id="7_mq0y1"]
+[ext_resource type="Texture2D" uid="uid://b4qghhn1feynx" path="res://assets/kenney_fantasy-ui-borders/panel-013.png" id="9_8nkf1"]
 [ext_resource type="AudioStream" uid="uid://c4lhmq6fehmew" path="res://audio/kenney_music-jingles/jingles_PIZZI16.ogg" id="9_nhd55"]
 [ext_resource type="AudioStream" uid="uid://bqhccypwys4fv" path="res://audio/kenney_music-jingles/jingles_PIZZI07.ogg" id="10_q6mn5"]
 [ext_resource type="AudioStream" uid="uid://bna8dye7lol81" path="res://audio/kenney_music-jingles/jingles_PIZZI10.ogg" id="11_q6mn5"]
@@ -299,22 +300,26 @@ text = "0"
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="TextureRect" type="TextureRect" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer3"]
+[node name="NinePatchRect" type="NinePatchRect" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(512, 64)
 layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("1_c45xl")
-stretch_mode = 2
+texture = ExtResource("9_8nkf1")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
 
-[node name="ExitButton" type="Button" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-text = "Back to Main Menu"
-
-[node name="TextureRect2" type="TextureRect" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("1_c45xl")
-stretch_mode = 2
-flip_h = true
+[node name="ExitButton" type="Button" parent="GameOver/CenterContainer/VBoxContainer/HBoxContainer3/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.099986, 0.099986, 0.099986, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "BACK TO MAIN MENU"
 
 [node name="GameStartedAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_nhd55")
@@ -328,4 +333,4 @@ bus = &"SFX"
 stream = ExtResource("11_q6mn5")
 bus = &"SFX"
 
-[connection signal="pressed" from="GameOver/CenterContainer/VBoxContainer/HBoxContainer3/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="GameOver/CenterContainer/VBoxContainer/HBoxContainer3/NinePatchRect/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -8,6 +8,7 @@ func _ready() -> void:
 	$EffectTickTimer.start()
 	$MusicAudioStreamPlayer.play()
 	$UI/HUD.hide()
+	$UI/Difficulty.show()
 	get_tree().paused = true
 
 func _on_damage_player(damage: int) -> void:
