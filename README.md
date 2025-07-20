@@ -1,4 +1,8 @@
+<p align="center"><img width="400px" src="project-files/thumbnail.png" /></p>
+
 # Magickal Powers 🧙✨
+
+Play the game: https://eddex.itch.io/magickal-powers
 
 This game was made in 48h for the [Kenney Jam 2025](https://itch.io/jam/kenney-jam-2025).
 
@@ -18,4 +22,4 @@ game assets made by [Kenney](https://www.kenney.nl/) or [Kay Lousberg](https://k
 	- [RPG Audio](https://kenney.nl/assets/rpg-audio)
 	- [Interface Sounds](https://kenney.nl/assets/interface-sounds)
 	- [Impact Sounds](https://kenney.nl/assets/impact-sounds)
-	- [Music Jingles](https://kenney.nl/assets/music-jingles)eqw
+	- [Music Jingles](https://kenney.nl/assets/music-jingles)
