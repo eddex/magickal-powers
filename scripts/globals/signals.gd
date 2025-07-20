@@ -5,6 +5,7 @@ extends Node
 signal player_health_changed(new_health: int)
 signal damage_player(damage: int)
 signal game_over()
+signal game_won()
 
 signal element_selected(pos: int, element: E.Element)
 signal elements_cleared()

@@ -6,6 +6,15 @@ var soldier_enemy_scene := preload("res://scenes/enemies/soldier-enemy/soldier_e
 var brute_enemy_scene := preload("res://scenes/enemies/brute-enemy/brute_enemy.tscn")
 
 var _enemy_count := 0
+var _enemies_killed := 0
+var difficulty : E.Difficulty
+
+var max_enemies := {
+	E.Difficulty.Easy: 20,
+	E.Difficulty.Normal: 40,
+	E.Difficulty.Hard: 60,
+	E.Difficulty.Endless: 9999
+}
 
 func _ready() -> void:
 	enemy_spawn_timer.start()
@@ -13,10 +22,14 @@ func _ready() -> void:
 	spawn_new_enemy()
 
 func _on_enemy_died() -> void:
-	print("_on_enemy_died, ", _enemy_count)
+	_enemies_killed = _enemies_killed + 1
 	spawn_new_enemy()
+	if _enemies_killed >= max_enemies[difficulty]:
+		S.game_won.emit()
 
 func spawn_new_enemy() -> void:
+	if _enemy_count >= max_enemies[difficulty]:
+		return
 	_enemy_count = _enemy_count + 1
 	randomize()
 	var enemy : EnemyBase = brute_enemy_scene.instantiate() if randi() % 5 == 0 else soldier_enemy_scene.instantiate()

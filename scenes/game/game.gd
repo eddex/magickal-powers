@@ -7,6 +7,8 @@ func _ready() -> void:
 	S.player_health_changed.emit(player_health)
 	$EffectTickTimer.start()
 	$MusicAudioStreamPlayer.play()
+	$UI/HUD.hide()
+	get_tree().paused = true
 
 func _on_damage_player(damage: int) -> void:
 	var new_player_health := player_health - damage
@@ -23,3 +25,9 @@ func _on_enemy_spawn_timer_timeout() -> void:
 
 func _on_effect_tick_timer_timeout() -> void:
 	S.tick.emit()
+
+
+func _on_difficulty_difficulty_selected(difficulty: E.Difficulty) -> void:
+	$Enemies.difficulty = difficulty
+	$UI/HUD.show()
+	get_tree().paused = false

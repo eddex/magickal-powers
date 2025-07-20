@@ -2,7 +2,6 @@ extends SpellBase
 
 var speed := 750
 var age := 0.0
-var spell : E.SpellElements = E.SpellElements.Earth
 
 func _ready() -> void:
 	$Effects/AnimationPlayer.play("ROTATE")

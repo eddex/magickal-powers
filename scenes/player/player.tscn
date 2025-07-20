@@ -362,6 +362,7 @@ libraries = {
 
 [node name="ChargeAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_je7p5")
+volume_db = 1.405
 pitch_scale = 0.06
 bus = &"SFX"
 

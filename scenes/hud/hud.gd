@@ -8,6 +8,7 @@ func _ready() -> void:
 	$GameStartedAudioStreamPlayer.play()
 	S.player_health_changed.connect(_on_player_health_chnaged)
 	S.game_over.connect(_on_game_over)
+	S.game_won.connect(_on_game_won)
 	S.element_selected.connect(_on_element_selected)
 	S.elements_cleared.connect(_on_elements_cleared)
 	S.damage_dealt.connect(_on_damage_dealt)
@@ -16,6 +17,18 @@ func _ready() -> void:
 func _on_player_health_chnaged(new_health: int) -> void:
 	%PlayerHealth.value = new_health
 	%PlayerHealth/Label.text = str(new_health)
+
+func _on_game_won() -> void:
+	%GameOverLabel.text = "YOU WIN!"
+	$GameOver.show()
+	$GameWonAudioStreamPlayer.play()
+	if %PlayerHealth.value == 100:
+		score = score + 1000
+		_update_hud_score()
+	%KillsLabel.text = str(kills)
+	%NewHighScore.visible = G.high_score < score
+	if G.high_score < score:
+		G.high_score = score
 
 func _on_game_over() -> void:
 	$GameOver.show()
@@ -51,3 +64,4 @@ func _on_enemy_died() -> void:
 
 func _update_hud_score() -> void:
 	%HudScoreLabel.text = str(score)
+	%ScoreLabel.text = str(score)

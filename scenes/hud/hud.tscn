@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b2q5qmdj6x4rs"]
+[gd_scene load_steps=12 format=3 uid="uid://b2q5qmdj6x4rs"]
 
 [ext_resource type="Script" uid="uid://banep6mt3iwtk" path="res://scenes/hud/hud.gd" id="1_0bx4p"]
 [ext_resource type="Texture2D" uid="uid://d233qptx7nu7i" path="res://assets/kenney_fantasy-ui-borders/divider-fade-001.png" id="1_c45xl"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dqi2v8xr3dh8p" path="res://assets/kenney_fantasy-ui-borders/panel-transparent-center-031.png" id="7_mq0y1"]
 [ext_resource type="AudioStream" uid="uid://c4lhmq6fehmew" path="res://audio/kenney_music-jingles/jingles_PIZZI16.ogg" id="9_nhd55"]
 [ext_resource type="AudioStream" uid="uid://bqhccypwys4fv" path="res://audio/kenney_music-jingles/jingles_PIZZI07.ogg" id="10_q6mn5"]
+[ext_resource type="AudioStream" uid="uid://bna8dye7lol81" path="res://audio/kenney_music-jingles/jingles_PIZZI10.ogg" id="11_q6mn5"]
 
 [node name="HUD" type="Control"]
 process_mode = 3
@@ -240,13 +241,14 @@ layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="Label" type="Label" parent="GameOver/CenterContainer/VBoxContainer"]
+[node name="GameOverLabel" type="Label" parent="GameOver/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 128
 text = "Game Over"
 horizontal_alignment = 1
 
-[node name="NewHighScore" type="Label" parent="GameOver/CenterContainer/VBoxContainer/Label"]
+[node name="NewHighScore" type="Label" parent="GameOver/CenterContainer/VBoxContainer/GameOverLabel"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -320,6 +322,10 @@ bus = &"SFX"
 
 [node name="GameOverAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_q6mn5")
+bus = &"SFX"
+
+[node name="GameWonAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_q6mn5")
 bus = &"SFX"
 
 [connection signal="pressed" from="GameOver/CenterContainer/VBoxContainer/HBoxContainer3/ExitButton" to="." method="_on_exit_button_pressed"]

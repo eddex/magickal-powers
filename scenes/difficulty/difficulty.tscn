@@ -1,0 +1,139 @@
+[gd_scene load_steps=5 format=3 uid="uid://drcf26spbujbd"]
+
+[ext_resource type="Theme" uid="uid://bvv853wuvmlap" path="res://ressources/ui_theme.tres" id="1_imjmy"]
+[ext_resource type="Texture2D" uid="uid://b4qghhn1feynx" path="res://assets/kenney_fantasy-ui-borders/panel-013.png" id="2_cs642"]
+[ext_resource type="Script" uid="uid://brsxmx4w4i2kt" path="res://scenes/difficulty/difficulty.gd" id="2_yktgk"]
+[ext_resource type="AudioStream" uid="uid://c4lhmq6fehmew" path="res://audio/kenney_music-jingles/jingles_PIZZI16.ogg" id="4_yktgk"]
+
+[node name="Difficulty" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_imjmy")
+script = ExtResource("2_yktgk")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Choose Difficulty"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(512, 64)
+layout_mode = 2
+texture = ExtResource("2_cs642")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+
+[node name="EasyButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.0923971, 0.0923971, 0.0923971, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "EASY"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(512, 64)
+layout_mode = 2
+texture = ExtResource("2_cs642")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+
+[node name="NormalButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.0962047, 0.0962048, 0.0962047, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "NORMAL"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(512, 64)
+layout_mode = 2
+texture = ExtResource("2_cs642")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+
+[node name="HardButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer3/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.0962047, 0.0962048, 0.0962047, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "HARD"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(512, 64)
+layout_mode = 2
+texture = ExtResource("2_cs642")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+
+[node name="EndlessButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer4/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.099986, 0.099986, 0.099986, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "ENDLESS"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_yktgk")
+bus = &"SFX"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/NinePatchRect/EasyButton" to="." method="_on_easy_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer2/NinePatchRect/NormalButton" to="." method="_on_normal_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer3/NinePatchRect/HardButton" to="." method="_on_hard_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer4/NinePatchRect/EndlessButton" to="." method="_on_endless_button_pressed"]
