@@ -2,6 +2,9 @@ extends Node
 
 var config = ConfigFile.new()
 
+func _ready() -> void:
+	load_from_file()
+
 func load_from_file() -> void:
 	var err = config.load("user://scores.cfg")
 	if err != OK:

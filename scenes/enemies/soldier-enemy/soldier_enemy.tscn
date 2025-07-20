@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://cyn4w161eyqjs"]
+[gd_scene load_steps=16 format=3 uid="uid://cyn4w161eyqjs"]
 
 [ext_resource type="Script" uid="uid://dj63lbk425gbk" path="res://scenes/enemies/soldier-enemy/soldier_enemy.gd" id="1_18cjy"]
 [ext_resource type="Texture2D" uid="uid://d2qah0p85qm1s" path="res://assets/kenney_scribble-dungeons/barrel.png" id="1_terh2"]
+[ext_resource type="Texture2D" uid="uid://c3df0yy8vsmwg" path="res://assets/kenney_particle-pack/dirt_01.png" id="3_63j1j"]
 [ext_resource type="Texture2D" uid="uid://vrspr3hiw11e" path="res://assets/kenney_scribble-dungeons/weapon_spear.png" id="3_en535"]
 [ext_resource type="Texture2D" uid="uid://c043nqrir7wg7" path="res://assets/kenney_scribble-dungeons/modified/dragon_mod.png" id="3_ukbnt"]
 [ext_resource type="Texture2D" uid="uid://tko50edrxthe" path="res://assets/kenney_scribble-dungeons/shield_straight.png" id="5_b3dbx"]
@@ -125,6 +126,18 @@ tracks/7/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Barrel/Blood:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_en535"]
 resource_name = "WALK"
@@ -229,6 +242,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Barrel/Blood:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bqcl7"]
 _data = {
@@ -250,6 +275,14 @@ shape = SubResource("CircleShape2D_en535")
 [node name="Barrel" type="Sprite2D" parent="."]
 self_modulate = Color(0, 0.647059, 1, 1)
 texture = ExtResource("1_terh2")
+
+[node name="Blood" type="Sprite2D" parent="Barrel"]
+visible = false
+self_modulate = Color(0.709804, 0.2, 0.298039, 1)
+show_behind_parent = true
+position = Vector2(-13, -1)
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("3_63j1j")
 
 [node name="Weapon" type="Sprite2D" parent="Barrel"]
 self_modulate = Color(0.623529, 0.647059, 0.662745, 1)

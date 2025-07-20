@@ -6,7 +6,6 @@ var score := 0
 var game_finished := false
 
 func _ready() -> void:
-	GameSave.load_from_file()
 	$GameOver.hide()
 	$GameStartedAudioStreamPlayer.play()
 	S.player_health_changed.connect(_on_player_health_chnaged)

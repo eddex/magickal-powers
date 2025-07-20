@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d233qptx7nu7i" path="res://assets/kenney_fantasy-ui-borders/divider-fade-001.png" id="4_w2hs4"]
 [ext_resource type="Texture2D" uid="uid://b7mcvahifi5m3" path="res://assets/kenney_cartography-pack/castleTall.png" id="5_6f8a5"]
 [ext_resource type="Texture2D" uid="uid://k5hynnbc6thf" path="res://assets/kenney_cartography-pack/parchmentFoldedCrinkled.png" id="5_w2hs4"]
-[ext_resource type="FontFile" uid="uid://c7nmsy3kudcdp" path="res://assets/fonts/Kenney Future.ttf" id="6_lhle4"]
+[ext_resource type="FontFile" uid="uid://c7nmsy3kudcdp" path="res://assets/kenney_kenney-fonts/Kenney Future.ttf" id="6_lhle4"]
 [ext_resource type="Texture2D" uid="uid://c3cnb6a46kd3u" path="res://assets/kenney_cartography-pack/castle.png" id="6_sg3tv"]
 [ext_resource type="Texture2D" uid="uid://p2uegglgb41" path="res://assets/kenney_scribble-dungeons/plants.png" id="8_eel2y"]
 [ext_resource type="PackedScene" uid="uid://b6fklkwj1xfj1" path="res://scenes/settings-menu/settings.tscn" id="9_0n1sh"]
